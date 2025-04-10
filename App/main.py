@@ -3,7 +3,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 import torch
 import pickle
-from spike_neural import model as spike_model
+# from spike_neural import model as spike_model
 import tensorflow as tf
 
 # Load model and tokenizer
@@ -41,24 +41,24 @@ def preprocess(text):
 # Function to predict a single text
 
 
-def predict_single(text):
-    # Convert text to embedding
-    text_embedding = get_embeddings([text])  # Ensure it's a NumPy array
+# def predict_single(text):
+#     # Convert text to embedding
+#     text_embedding = get_embeddings([text])  # Ensure it's a NumPy array
 
-    # Convert to PyTorch tensor and move to device
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    text_tensor = torch.tensor(text_embedding).float().to(device)
+#     # Convert to PyTorch tensor and move to device
+#     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+#     text_tensor = torch.tensor(text_embedding).float().to(device)
 
-    # Make prediction
-    spike_model.to(device)
-    spike_model.eval()
+#     # Make prediction
+#     spike_model.to(device)
+#     spike_model.eval()
 
-    with torch.no_grad():
-        output = spike_model(text_tensor).squeeze(1)
-        # Convert logits to binary class
-        prediction = torch.sigmoid(output) > 0.5
-    print(prediction)
-    return prediction.item()  # Convert tensor to Python boolean
+#     with torch.no_grad():
+#         output = spike_model(text_tensor).squeeze(1)
+#         # Convert logits to binary class
+#         prediction = torch.sigmoid(output) > 0.5
+#     print(prediction)
+#     return prediction.item()  # Convert tensor to Python boolean
 
 
 def predict(text):
@@ -88,11 +88,11 @@ def main():
     text = st.text_area("Text", "Type Here")
 
     if text:
-        if model_choice == "Neural Network":
+        if model_choice == "Neural Network" or model_choice=="Spike Neural Network":
             prediction = predict_using_neural_network(text)
             label = int(prediction)
-        elif model_choice== "Spike Neural Network":
-            label = predict_single(text)
+        # elif model_choice== "Spike Neural Network":
+            # label = predict_single(text)
         else:
             label, _ = predict(text)
         
