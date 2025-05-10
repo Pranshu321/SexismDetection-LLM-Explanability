@@ -85,22 +85,22 @@ def main():
     """
     st.markdown(html_temp, unsafe_allow_html=True)
     st.text("Paste the text for prediction")
-    text = st.text_area("Text", "Type Here")
+    # text = st.text_area("Text", "Type Here")
+
+    text = st.text_area("Enter Tweet")
 
     if text:
-        if model_choice == "Neural Network" or model_choice=="Spike Neural Network":
-            prediction = predict_using_neural_network(text)
-            label = int(prediction)
-        # elif model_choice== "Spike Neural Network":
-            # label = predict_single(text)
-        else:
-            label, _ = predict(text)
-        
         if st.button("Predict"):
-            if label == 1:
-                st.success('This is a Sexist Tweet')
+            if model_choice in ["Neural Network", "Spike Neural Network"]:
+                prediction = predict_using_neural_network(text)
+                label = int(prediction)
             else:
-                st.error('This is a Non Sexist Tweet')
+                label, _ = predict(text)
+            
+            if label == 1:
+                st.success("This is a Sexist Tweet")
+            else:
+                st.error("This is a Non Sexist Tweet")
 
 
 if __name__ == '__main__':
