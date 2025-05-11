@@ -52,15 +52,26 @@ This project builds on prior research in bias detection, leveraging advances in 
 ### Model Development
 
 * **Artificial Neural Network (ANN)**: Deep feedforward network using USE embeddings with dropout and batch normalization.
+
+![alttext](images/ANN.png)
+
 * **Spiking Neural Network (SNN)**: Neuromorphic architecture with Leaky Integrate-and-Fire (LIF) neurons for energy-efficient processing.
+
+![alttext](images/SNN.png)
+
 * **BERT-based Model**: Fine-tuned BERTweet-Large for multi-task learning (bias classification, sentiment analysis, sarcasm detection).
 
-![alt text](images/arch.jpg)
+![alttext](images/arch.jpg)
 
 ### Integrating Explainability
 
 * **ANN and SNN**: LIME for local interpretability.
+
+![alttext](images/NN.jpeg)
+
 * **BERT-based Model**: Integrated Gradients for token-level attribution.
+
+![alttext](images/llm_explanability.png)
 
 ## Deployment and Application
 
